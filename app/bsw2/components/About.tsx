@@ -111,38 +111,70 @@ export function About() {
             <div className="bg-card rounded-lg shadow-xl p-8 mb-6">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/bsw2/logo.png"
-                alt="Balanced State Wellness"
+                src="/images/bizcard.png"
+                alt="Balanced State Wellness Business Card"
                 className="w-full h-auto"
               />
             </div>
 
             <div className="bg-card rounded-lg shadow-xl p-8">
               <h3
-                className="text-2xl mb-4 text-foreground text-center"
+                className="text-2xl mb-6 text-foreground text-center"
                 style={{ fontFamily: "Cormorant, serif" }}
               >
                 Your Instructor
               </h3>
-              <div className="text-center">
-                <h4
-                  className="text-xl mb-2 text-primary"
-                  style={{ fontFamily: "Cormorant, serif" }}
+
+              {/* Angled photos flanking the instructor info */}
+              <div className="flex items-center justify-center gap-4 mb-6">
+                <motion.div
+                  initial={{ opacity: 0, rotate: 0 }}
+                  animate={isInView ? { opacity: 1, rotate: -3 } : {}}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="flex-shrink-0"
                 >
-                  Dr. Nikki Freeman, Ed.D.
-                </h4>
-                <div
-                  className="space-y-1 text-muted-foreground"
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                >
-                  <p>Professor of Communication</p>
-                  <p>Enlifted Coach</p>
-                  <p>YTT 200</p>
-                  <p>Zen Barre Certified</p>
-                  <p>Pilates Certified</p>
-                  <p>CF L-1 Certified</p>
-                  <p>Enlifted L-2 Certified</p>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/Nikki_Freeman_plants40.jpg"
+                    alt="Dr. Nikki Freeman"
+                    className="w-28 h-36 sm:w-36 sm:h-44 object-cover rounded-lg shadow-lg border-4 border-secondary"
+                  />
+                </motion.div>
+
+                <div className="text-center flex-shrink-0">
+                  <h4
+                    className="text-xl mb-2 text-primary"
+                    style={{ fontFamily: "Cormorant, serif" }}
+                  >
+                    Dr. Nikki Freeman, Ed.D.
+                  </h4>
+                  <div
+                    className="space-y-1 text-muted-foreground text-sm"
+                    style={{ fontFamily: "Inter, sans-serif" }}
+                  >
+                    <p>Professor of Communication</p>
+                    <p>Enlifted Coach</p>
+                    <p>YTT 200</p>
+                    <p>Zen Barre Certified</p>
+                    <p>Pilates Certified</p>
+                    <p>CF L-1 Certified</p>
+                    <p>Enlifted L-2 Certified</p>
+                  </div>
                 </div>
+
+                <motion.div
+                  initial={{ opacity: 0, rotate: 0 }}
+                  animate={isInView ? { opacity: 1, rotate: 3 } : {}}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  className="flex-shrink-0"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/Nikki_Freeman_yoga40.jpg"
+                    alt="Dr. Nikki Freeman teaching yoga"
+                    className="w-28 h-36 sm:w-36 sm:h-44 object-cover rounded-lg shadow-lg border-4 border-accent"
+                  />
+                </motion.div>
               </div>
             </div>
           </motion.div>
