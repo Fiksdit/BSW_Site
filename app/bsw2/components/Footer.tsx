@@ -23,7 +23,7 @@ export function Footer() {
             <h4 className="mb-4" style={{ fontFamily: "Cormorant, serif" }}>
               Quick Links
             </h4>
-            <ul className="space-y-2 text-sm">
+            <ul className="grid grid-cols-2 gap-x-8 gap-y-2 text-sm">
               <li>
                 <a
                   href="#home"

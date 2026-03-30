@@ -33,13 +33,13 @@ export function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4 md:py-6">
+        <div className="flex justify-between items-center py-1 md:py-2">
           <div className="flex items-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/bsw2/logo.png"
               alt="Balanced State Wellness"
-              className="h-[72px] md:h-[96px] w-auto"
+              className="h-[72px] md:h-[150px] w-auto"
             />
           </div>
 

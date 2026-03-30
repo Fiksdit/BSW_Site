@@ -1,11 +1,48 @@
 "use client";
 
-import { Mail, Facebook } from "lucide-react";
+import { useState } from "react";
+import { Mail, Facebook, Loader2 } from "lucide-react";
 import { motion } from "motion/react";
 import { useInView } from "./hooks/useInView";
 
 export function Contact() {
   const [ref, isInView] = useInView({ threshold: 0.1 });
+  const [formState, setFormState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setFormState("sending");
+    setErrorMsg("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const data = {
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      subject: formData.get("subject") as string,
+      message: formData.get("message") as string,
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      if (res.ok) {
+        setFormState("sent");
+        form.reset();
+      } else {
+        setFormState("error");
+        setErrorMsg(result.error || "Something went wrong.");
+      }
+    } catch {
+      setFormState("error");
+      setErrorMsg("Network error. Please try again.");
+    }
+  }
 
   return (
     <section id="contact" className="py-20 md:py-32 bg-background" ref={ref}>
@@ -130,7 +167,7 @@ export function Contact() {
             >
               Send us a message
             </h3>
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
                   htmlFor="bsw2-name"
@@ -142,6 +179,9 @@ export function Contact() {
                 <input
                   type="text"
                   id="bsw2-name"
+                  name="name"
+                  required
+                  maxLength={100}
                   className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                   style={{ fontFamily: "Inter, sans-serif" }}
                 />
@@ -157,6 +197,9 @@ export function Contact() {
                 <input
                   type="email"
                   id="bsw2-email"
+                  name="email"
+                  required
+                  maxLength={254}
                   className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                   style={{ fontFamily: "Inter, sans-serif" }}
                 />
@@ -171,6 +214,8 @@ export function Contact() {
                 </label>
                 <select
                   id="bsw2-subject"
+                  name="subject"
+                  required
                   className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                   style={{ fontFamily: "Inter, sans-serif" }}
                 >
@@ -188,19 +233,44 @@ export function Contact() {
                   style={{ fontFamily: "Inter, sans-serif" }}
                 >
                   Message
+                  <span className="text-muted-foreground font-normal ml-1">(min 10 characters)</span>
                 </label>
                 <textarea
                   id="bsw2-message"
+                  name="message"
+                  required
+                  minLength={10}
+                  maxLength={2000}
                   rows={4}
                   className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none"
                   style={{ fontFamily: "Inter, sans-serif" }}
                 />
               </div>
+
+              {formState === "sent" && (
+                <div className="p-3 bg-green-50 border border-green-200 rounded-lg text-green-800 text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
+                  Message sent successfully! We&apos;ll get back to you soon.
+                </div>
+              )}
+              {formState === "error" && (
+                <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-800 text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
+                  {errorMsg}
+                </div>
+              )}
+
               <button
                 type="submit"
-                className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-200"
+                disabled={formState === "sending"}
+                className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
-                Send Message
+                {formState === "sending" ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  "Send Message"
+                )}
               </button>
             </form>
           </motion.div>

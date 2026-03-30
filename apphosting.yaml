@@ -1,0 +1,22 @@
+kind: "AppStack"
+apiVersion: "v1"
+
+buildConfig:
+  rootDir: "."
+
+runConfig:
+  maxInstances: 3
+  baseDirectory: "."
+  appDirectory: "."
+
+env:
+# --- BREVO CONFIGURATION ---
+  - variable: CONTACT_EMAIL
+    value: "info@fiksdit.com"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: BREVO_API_KEY
+    secret: BREVO_API_KEY
+    availability:
+      - RUNTIME
