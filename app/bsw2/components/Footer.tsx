@@ -92,11 +92,11 @@ export function Footer() {
               Join the Sedalia Yoga & Wellness Community Facebook Group
             </p>
             <a
-              href="mailto:drnpmfreeman@gmail.com"
+              href="mailto:drnpm.freeman@gmail.com"
               className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
               style={{ fontFamily: "Inter, sans-serif" }}
             >
-              drnpmfreeman@gmail.com
+              drnpm.freeman@gmail.com
             </a>
           </div>
         </div>

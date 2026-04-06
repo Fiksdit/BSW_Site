@@ -13,8 +13,8 @@ export default function Bsw2Page() {
       <Header />
       <main>
         <Hero />
-        <Classes />
         <About />
+        <Classes />
         <Schedule />
         <Locations />
         <Contact />

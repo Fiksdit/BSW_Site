@@ -11,8 +11,7 @@ const classes = [
     description:
       "A gentle practice focusing on alignment, breathing techniques, and foundational postures",
     image:
-      "https://images.unsplash.com/photo-1758274539654-23fa349cc090?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMG1lZGl0YXRpbmclMjBwZWFjZWZ1bHxlbnwxfHx8fDE3NzQ4OTc2MzF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    duration: "60 min",
+      "https://images.unsplash.com/photo-1758274525981-05497b2c5b97?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx5b2dhJTIwY2xhc3MlMjBncm91cCUyMGNhbG18ZW58MXx8fHwxNzc0ODk5MDk5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
     level: "All Levels",
   },
   {
@@ -21,8 +20,7 @@ const classes = [
     description:
       "Gentle flowing sequences transitioning into deep stretch poses for flexibility and relaxation",
     image:
-      "https://images.unsplash.com/photo-1758274525981-05497b2c5b97?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx5b2dhJTIwY2xhc3MlMjBncm91cCUyMGNhbG18ZW58MXx8fHwxNzc0ODk5MDk5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    duration: "75 min",
+      "https://images.unsplash.com/photo-1758274539654-23fa349cc090?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMG1lZGl0YXRpbmclMjBwZWFjZWZ1bHxlbnwxfHx8fDE3NzQ4OTc2MzF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
     level: "All Levels",
   },
   {
@@ -32,7 +30,6 @@ const classes = [
       "Energizing practice in a heated room to deepen stretches and detoxify",
     image:
       "https://images.unsplash.com/photo-1631441961409-d350ca05f453?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx6ZW4lMjBtZWRpdGF0aW9uJTIwc3RvbmVzfGVufDF8fHx8MTc3NDg0ODM2M3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    duration: "60 min",
     level: "Intermediate",
   },
   {
@@ -42,7 +39,6 @@ const classes = [
       "Dynamic strength-building practice combining yoga flows with toning exercises",
     image:
       "https://images.unsplash.com/photo-1758274535024-be3faa30f507?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx5b2dhJTIwaW5zdHJ1Y3RvciUyMHRlYWNoaW5nfGVufDF8fHx8MTc3NDgyNTI2N3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    duration: "60 min",
     level: "Intermediate",
   },
   {
@@ -52,7 +48,6 @@ const classes = [
       "Pilates-inspired movements combined with yoga postures for strength and flexibility",
     image:
       "https://images.unsplash.com/photo-1767605565789-5b18cdbbf6ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwZWFjZWZ1bCUyMHlvZ2ElMjBzdHVkaW8lMjBpbnRlcmlvcnxlbnwxfHx8fDE3NzQ4ODc3NTJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    duration: "60 min",
     level: "All Levels",
   },
   {
@@ -60,9 +55,7 @@ const classes = [
     name: "Reformer Pilates",
     description:
       "Equipment-based Pilates focusing on core strength, alignment, and controlled movement",
-    image:
-      "https://images.unsplash.com/photo-1758274539654-23fa349cc090?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMG1lZGl0YXRpbmclMjBwZWFjZWZ1bHxlbnwxfHx8fDE3NzQ4OTc2MzF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    duration: "50 min",
+    image: "/images/Pilates_reformer.jpg",
     level: "All Levels",
   },
 ];
@@ -89,7 +82,7 @@ export function Classes() {
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
             style={{ fontFamily: "Inter, sans-serif" }}
           >
-            Choose from a variety of yoga and wellness classes to suit your needs
+            Choose from a variety of yoga and wellness classes to suit your needs. All classes can be modified to accommodate any experience level.
           </p>
         </motion.div>
 
@@ -122,8 +115,7 @@ export function Classes() {
                 >
                   {yogaClass.description}
                 </p>
-                <div className="flex justify-between items-center text-sm text-muted-foreground">
-                  <span>{yogaClass.duration}</span>
+                <div className="flex justify-end text-sm text-muted-foreground">
                   <span className="px-3 py-1 bg-secondary rounded-full">
                     {yogaClass.level}
                   </span>

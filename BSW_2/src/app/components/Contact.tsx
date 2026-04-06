@@ -41,11 +41,11 @@ export function Contact() {
                   For more information and pricing:
                 </p>
                 <a 
-                  href="mailto:drnpmfreeman@gmail.com" 
+                  href="mailto:drnpm.freeman@gmail.com" 
                   className="text-primary hover:text-primary/80 transition-colors"
                   style={{ fontFamily: 'Inter, sans-serif' }}
                 >
-                  drnpmfreeman@gmail.com
+                  drnpm.freeman@gmail.com
                 </a>
               </div>
             </div>

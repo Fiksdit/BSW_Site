@@ -78,12 +78,20 @@ export function About() {
                     Yoga
                   </p>
                 </div>
-                <div className="bg-secondary/50 rounded-lg p-4 col-span-2">
+                <div className="bg-secondary/50 rounded-lg p-4">
                   <p
                     className="text-foreground"
                     style={{ fontFamily: "Inter, sans-serif" }}
                   >
                     Teambuilding
+                  </p>
+                </div>
+                <div className="bg-secondary/50 rounded-lg p-4">
+                  <p
+                    className="text-foreground"
+                    style={{ fontFamily: "Inter, sans-serif" }}
+                  >
+                    Group Fitness
                   </p>
                 </div>
               </div>

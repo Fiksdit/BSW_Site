@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
-const RECIPIENT_EMAIL = "drnpmfreeman@gmail.com";
+const RECIPIENT_EMAIL = "drnpm.freeman@gmail.com";
 const SENDER_NAME = "Balanced State Wellness";
 
 export async function POST(request: NextRequest) {
