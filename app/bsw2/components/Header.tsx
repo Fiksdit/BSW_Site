@@ -21,6 +21,7 @@ export function Header() {
     { name: "Classes", href: "#classes" },
     { name: "Schedule", href: "#schedule" },
     { name: "Locations", href: "#locations" },
+    { name: "Consulting", href: "#consulting" },
     { name: "Contact", href: "#contact" },
   ];
 
