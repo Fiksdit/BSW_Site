@@ -12,7 +12,7 @@ runConfig:
 env:
 # --- BREVO CONFIGURATION ---
   - variable: CONTACT_EMAIL
-    value: "info@fiksdit.com"
+    value: "info@balancedstatewellness.com"
     availability:
       - BUILD
       - RUNTIME
