@@ -1,0 +1,284 @@
+"use client";
+
+import { useState } from "react";
+import { Mail, Facebook, Loader2 } from "lucide-react";
+import { motion } from "motion/react";
+import { useInView } from "./hooks/useInView";
+
+export function Contact() {
+  const [ref, isInView] = useInView({ threshold: 0.1 });
+  const [formState, setFormState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setFormState("sending");
+    setErrorMsg("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const data = {
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      subject: formData.get("subject") as string,
+      message: formData.get("message") as string,
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      if (res.ok) {
+        setFormState("sent");
+        form.reset();
+      } else {
+        setFormState("error");
+        setErrorMsg(result.error || "Something went wrong.");
+      }
+    } catch {
+      setFormState("error");
+      setErrorMsg("Network error. Please try again.");
+    }
+  }
+
+  return (
+    <section id="contact" className="py-20 md:py-32 bg-background" ref={ref}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2
+            className="text-4xl md:text-5xl mb-4 text-foreground"
+            style={{ fontFamily: "Cormorant, serif" }}
+          >
+            Get In Touch
+          </h2>
+          <p
+            className="text-lg text-muted-foreground max-w-2xl mx-auto"
+            style={{ fontFamily: "Inter, sans-serif" }}
+          >
+            Have questions or want to learn more? We&apos;d love to hear from
+            you
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
+          >
+            <div className="flex items-start space-x-4">
+              <div className="p-3 bg-secondary rounded-lg">
+                <Mail className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <h3
+                  className="mb-2 text-foreground"
+                  style={{ fontFamily: "Cormorant, serif" }}
+                >
+                  Email
+                </h3>
+                <p
+                  className="text-muted-foreground mb-2"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  For more information and pricing:
+                </p>
+                <a
+                  href="mailto:drnpm.freeman@gmail.com"
+                  className="text-primary hover:text-primary/80 transition-colors"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  drnpm.freeman@gmail.com
+                </a>
+              </div>
+            </div>
+
+            <div className="flex items-start space-x-4">
+              <div className="p-3 bg-secondary rounded-lg">
+                <Facebook className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <h3
+                  className="mb-2 text-foreground"
+                  style={{ fontFamily: "Cormorant, serif" }}
+                >
+                  Join Our Community
+                </h3>
+                <p
+                  className="text-muted-foreground mb-2"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  Stay updated on classes and events:
+                </p>
+                <a
+                  href="https://www.facebook.com/groups/565799490642298"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:text-primary/80 transition-colors"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  Sedalia Yoga &amp; Wellness Community Facebook Group
+                </a>
+              </div>
+            </div>
+
+            <div className="bg-muted/50 rounded-lg p-6">
+              <h3
+                className="text-xl mb-3 text-foreground"
+                style={{ fontFamily: "Cormorant, serif" }}
+              >
+                Individual or Group Sessions
+              </h3>
+              <p
+                className="text-muted-foreground mb-4"
+                style={{ fontFamily: "Inter, sans-serif" }}
+              >
+                Customized consulting and professional development sessions
+                available based on your needs:
+              </p>
+              <ul
+                className="space-y-2 text-muted-foreground"
+                style={{ fontFamily: "Inter, sans-serif" }}
+              >
+                <li>&#8226; Mindset Training</li>
+                <li>&#8226; Communication Skills</li>
+                <li>&#8226; Breathwork Sessions</li>
+                <li>&#8226; Private Yoga Classes</li>
+                <li>&#8226; Teambuilding Workshops</li>
+              </ul>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8 }}
+            className="bg-card rounded-lg shadow-lg p-8"
+          >
+            <h3
+              className="text-2xl mb-6 text-foreground"
+              style={{ fontFamily: "Cormorant, serif" }}
+            >
+              Send us a message
+            </h3>
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              <div>
+                <label
+                  htmlFor="bsw2-name"
+                  className="block text-sm mb-2 text-foreground"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="bsw2-name"
+                  name="name"
+                  required
+                  maxLength={100}
+                  className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="bsw2-email"
+                  className="block text-sm mb-2 text-foreground"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="bsw2-email"
+                  name="email"
+                  required
+                  maxLength={254}
+                  className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="bsw2-subject"
+                  className="block text-sm mb-2 text-foreground"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  Subject
+                </label>
+                <select
+                  id="bsw2-subject"
+                  name="subject"
+                  required
+                  className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  <option>General Inquiry</option>
+                  <option>Class Information</option>
+                  <option>Private Session</option>
+                  <option>Group Workshop</option>
+                  <option>Consulting Services</option>
+                </select>
+              </div>
+              <div>
+                <label
+                  htmlFor="bsw2-message"
+                  className="block text-sm mb-2 text-foreground"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  Message
+                  <span className="text-muted-foreground font-normal ml-1">(min 10 characters)</span>
+                </label>
+                <textarea
+                  id="bsw2-message"
+                  name="message"
+                  required
+                  minLength={10}
+                  maxLength={2000}
+                  rows={4}
+                  className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                />
+              </div>
+
+              {formState === "sent" && (
+                <div className="p-3 bg-green-50 border border-green-200 rounded-lg text-green-800 text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
+                  Message sent successfully! We&apos;ll get back to you soon.
+                </div>
+              )}
+              {formState === "error" && (
+                <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-800 text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
+                  {errorMsg}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={formState === "sending"}
+                className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              >
+                {formState === "sending" ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  "Send Message"
+                )}
+              </button>
+            </form>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
