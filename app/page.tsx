@@ -4,7 +4,7 @@ import { About } from "./bsw/components/About";
 import { Classes } from "./bsw/components/Classes";
 import { Schedule } from "./bsw/components/Schedule";
 import { Locations } from "./bsw/components/Locations";
-import { Consulting } from "./bsw2/components/Consulting";
+import { Consulting } from "./bsw/components/Consulting";
 import { Contact } from "./bsw/components/Contact";
 import { Footer } from "./bsw/components/Footer";
 
